@@ -14,10 +14,6 @@ const App = () => {
       <Intro />
       <Footer />
 
-
-
-
-
     </div>
   )
 }
