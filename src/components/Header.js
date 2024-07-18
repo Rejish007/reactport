@@ -8,7 +8,9 @@ const Header = () => {
 
       <NavLink to='/' className='text-2xl'>Tail Web </NavLink>
       <nav className='space-x-2'>
-        <NavLink to='/about' className=' hover:bg-white hover:text-black p-3 ' href="about">About</NavLink>
+        <NavLink to='/about' className={(e) => {
+          return e.isActive ? ' hover:bg-white hover:text-black p-3 text-purple-500 ' : ' hover:bg-white hover:text-black p-3 '
+        }} href="about">About</NavLink>
         <NavLink to='/contact' className=' hover:bg-white hover:text-black p-3 ' href="contact">Contact</NavLink>
       </nav>
 

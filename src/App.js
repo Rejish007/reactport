@@ -5,6 +5,7 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Page2 from './pages/nestedComponent/Page2';
 import RootLayout from './components/RootLayout';
+import NotFound from './pages/NotFound';
 
 const App = () => {
 
@@ -29,8 +30,12 @@ const App = () => {
         {
           path: 'contact',
           element: <Contact />
-        }
+        },
+        {
+          path: '*',
+          element: <NotFound />
 
+        }
       ]
     }
 

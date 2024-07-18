@@ -1,19 +1,64 @@
-import React from 'react'
-import { NavLink, Outlet } from 'react-router-dom'
+import { faker } from '@faker-js/faker';
+import { Button, Input } from '@material-tailwind/react';
+import React, { useState } from 'react';
+import CardDis from '../components/CardDis';
+import { useFormik } from 'formik';
+import CustomDialog from '../components/CustomDialog';
+
 
 
 const Home = () => {
-  return (
-    <div>
-      <h1>This is home</h1>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, sed. Dolores odit non possimus cupiditate distinctio sit quia. Corrupti laudantium voluptate libero iure, officiis enim? Quidem asperiores culpa maxime saepe?</p>
-      <p>++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</p>
-      <div className="navs divide-x-8 divide-black">
-        <NavLink to='/' >Page1</NavLink>
-        <NavLink to='/page2'>Page2</NavLink>
+  const [mails, setMails] = useState([]);
+  const [show, setShow] = useState(false);
+  const [index, setIndex] = useState(0);
 
-      </div>
-      <Outlet />
+  const formik = useFormik({
+    initialValues: {
+      email: ''
+
+    },
+    onSubmit: (val) => {
+      setMails((prev) => [...prev, faker.internet.email()]);
+
+    }
+  });
+  const toggle = () => {
+    setShow((prev) => !prev);
+
+  }
+  const removeMail = () => {
+    mails.splice(index, 1);
+    setMails((prev) => [...prev]);
+  }
+
+
+  return (
+    <div className='p-4'>
+      <form onSubmit={formik.handleSubmit}>
+        <Input
+          name='email'
+          onChange={formik.handleChange}
+          value={formik.values.email}
+          size="lg"
+          placeholder="name@mail.com"
+          label='Email'
+        />
+        <Button type='submit'>submit</Button>
+
+      </form>
+      {mails.map((mail, i) => {
+        return <div key={i} className='flex gap-2 mb-2'>
+          <h1>{mail}</h1>
+          <Button onClick={() => {
+            setIndex(() => i);
+            toggle();
+
+          }} size='sm' color='pink'>Delete</Button>
+        </div>
+      })}
+
+      <CustomDialog show={show} setShow={toggle} removeMail={removeMail} />
+
     </div>
   )
 }
