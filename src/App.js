@@ -6,6 +6,8 @@ import Contact from './pages/Contact';
 import Page2 from './pages/nestedComponent/Page2';
 import RootLayout from './components/RootLayout';
 import NotFound from './pages/NotFound';
+import CategoryItems from './pages/CategoryItems';
+import FoodDetail from './pages/FoodDetail';
 
 const App = () => {
 
@@ -22,6 +24,14 @@ const App = () => {
         {
           path: 'page2',
           element: <Page2 />
+        },
+        {
+          path: 'food-detail/:id',
+          element: <FoodDetail />
+        },
+        {
+          path: 'category/:cata',
+          element: <CategoryItems />
         },
         {
           path: 'about',
